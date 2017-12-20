@@ -12,7 +12,8 @@ class HomePage extends Component {
     return (
       <div>
         <h1>Home Page</h1>
-        { isAuthenticated ? <Button primary onClick={logout}>Logout</Button> : <Link to="/login">Login</Link> }
+        { isAuthenticated ? <Button primary onClick={logout}>Logout</Button> :
+        (<div><Link to="/login">Login</Link> or <Link to="/signup">Sign up</Link></div>)}
       </div>
 
     );
