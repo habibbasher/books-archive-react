@@ -20,3 +20,9 @@ export const logout = () => dispatch => {
     localStorage.removeItem('bookArchiveJWT');
     dispatch(userLoggedOut());
   };
+
+export const confirm = (token) => (dispatch) => api.user.confirm(token)
+.then(user => {
+  localStorage.bookArchiveJWT = user.token;
+  dispatch(userLoggedIn(user));
+});
