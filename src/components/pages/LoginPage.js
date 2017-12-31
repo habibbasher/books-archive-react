@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -16,6 +16,8 @@ class LoginPage extends Component {
         <h1>Login Page</h1>
 
         <LoginForm submit={this.submit} />
+
+        <Link to="forgot_password">Forgot Password?</Link>
       </div>
 
     );
