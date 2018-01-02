@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Form, Dropdown } from 'semantic-ui-react';
 import axios from 'axios';
 
@@ -30,27 +31,26 @@ class SearchBookForm extends Component {
   };
 
   fetchOptions = () => {
-    if (!this.state.query) {
-      return;
-    } else {
-      // console.log(this.state.query);
-      this.setState({ loading: true });
-      axios.get(`/api/books/search?q=${this.state.query}`)
-      .then(res => res.data.books)
-      .then(books => {
-        const options = [];
-        const booksHash = {};
-        books.forEach(book => {
-          booksHash[book.goodreadsId] = book;
-          options.push({
-            key: book.goodreadsId,
-            value: book.goodreadsId,
-            text: book.title
-          });
+    if (!this.state.query) return;
+
+    // console.log(this.state.query);
+    this.setState({ loading: true });
+    axios.get(`/api/books/search?q=${this.state.query}`)
+    .then(res => res.data.books)
+    .then(books => {
+      const options = [];
+      const booksHash = {};
+      books.forEach(book => {
+        booksHash[book.goodreadsId] = book;
+        options.push({
+          key: book.goodreadsId,
+          value: book.goodreadsId,
+          text: book.title
         });
-        this.setState({ loading: false, options, books: booksHash });
       });
-    }
+      this.setState({ loading: false, options, books: booksHash });
+    });
+
   };
 
   render() {
@@ -73,5 +73,9 @@ class SearchBookForm extends Component {
     );
   }
 }
+
+SearchBookForm.propTypes = {
+  onBookSelect: PropTypes.func.isRequired
+};
 
 export default SearchBookForm;

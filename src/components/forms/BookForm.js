@@ -88,7 +88,7 @@ class BookForm extends Component {
       <Segment>
         <Form onSubmit={this.onSubmit} loading={loading}>
 
-          <Grid columns={2} fluid stakeable>
+          <Grid columns={2}>
 
             <Grid.Row>
 
